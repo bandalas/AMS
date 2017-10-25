@@ -19,13 +19,12 @@ import java.util.List;
 public class EmpleadoHome extends JFrame{
 	 private JButton deleteBttn;
 	 private JButton editBttn;
-	 private JTable employeeTable;
 	 private JLabel jLabel1;
 	 private JButton registerBttn;
 	 private JScrollPane scrollTable;
-	 private JPanel tablePanel;
+	 private EmployeeTablePanel tablePanel;
 	 
-	 private EmployeeTableModel et;
+	 //private EmployeeTableModel et;
 	 private EmployeeController ec;
 	
 	public EmpleadoHome() {
@@ -42,6 +41,7 @@ public class EmpleadoHome extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				ru = new RegisterUser();
+				tablePanel.refresh();
 				
 			}
 		});
@@ -49,43 +49,40 @@ public class EmpleadoHome extends JFrame{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int column = 0;
+				tablePanel.refresh();
+				/*int column = 0;
 				int row = employeeTable.getSelectedRow();
-				System.out.println(employeeTable.getModel().getValueAt(row, column).toString());
+				System.out.println(employeeTable.getModel().getValueAt(row, column).toString());*/
 				
 			}
 			
 		});
 	}
 	
-	public void setData(List<Employee> db) {
-		et.setData(db);	
-	}
 	
 	
 	private void initComponents() {
 		ec = new EmployeeController();
 		
 		
-        tablePanel = new JPanel();
+        tablePanel = new EmployeeTablePanel();
         scrollTable = new JScrollPane();
-        employeeTable = new JTable();
         registerBttn = new JButton();
         deleteBttn = new JButton();
         editBttn = new JButton();
         jLabel1 = new JLabel();
         
-        employeeTable.setModel(new EmployeeTableModel());
+        tablePanel.setData(ec.getEmployee());
         
-        
+        tablePanel.refresh();
+       
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-       
-        scrollTable.setViewportView(employeeTable);
+        scrollTable.setViewportView(tablePanel.getTable());
 
-        scrollTable.setViewportView(employeeTable);
-
+        scrollTable.setViewportView(tablePanel.getTable());
+        
         registerBttn.setText("Nuevo");
 
         deleteBttn.setText("Editar");

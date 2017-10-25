@@ -10,14 +10,15 @@ import model.Employee;
 public class EmployeeTableModel extends AbstractTableModel{
 	
 	private List <Employee> db;
-	private String[] colNames = {"Nomina", "Nombre", "Apellido Patero", "Apellido Materno", "Fecha nacimiento", "Teléfono", "Dirección"};
-	
+	private String[] colNames = {"Nomina", "Nombre", "Apellido Paterno", "Apellido Materno", "Fecha nacimiento", "Teléfono", "Dirección"};
 	
 	public EmployeeTableModel() {
+		fireTableDataChanged();
 	}
 	
 	public void setData(List<Employee>db) {
 		this.db = db;
+		fireTableDataChanged();
 	}
 
 	@Override
