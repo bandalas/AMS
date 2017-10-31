@@ -34,6 +34,7 @@ public class Login extends JFrame implements Components{
 	private String password;
 	
 	private UserController uc;
+	
 	// Labels
 	private JLabel userLabel;
 	private JLabel passwordLabel;
@@ -52,6 +53,79 @@ public class Login extends JFrame implements Components{
 		super();
 		initComponents();
 	}
+	
+	public void respondToClick() {
+		
+		loginBttn.addActionListener(new ActionListener() {
+			private EmpleadoHome eh;
+			private ResidentHome s;
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				getInput();
+				if(isRoot()) {
+					eh = new EmpleadoHome();
+					dispose();
+				}else {
+					try {
+						if(canAccess()) {
+							s = new ResidentHome();
+							uc.disconnet();
+						
+						}else {
+							callErrorMessage("Los datos ingresados son incorrectos","Datos incorrectos");
+							uc.disconnet();
+						}
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+				}
+			}
+			
+		});
+		
+	}
+	
+	private boolean canAccess() throws SQLException {
+		connectDB();
+		return uc.canLog(username,password);
+	}
+	private boolean isRoot() {
+		if(username.equals("root") && password.equals("toor")) return true;
+		return false;
+	}
+	
+	private void callErrorMessage(String message, String title) {
+		JOptionPane.showMessageDialog(this, message,title,JOptionPane.ERROR_MESSAGE);
+	}
+	
+	public void getInput() {
+		this.username = userInput.getText();
+		
+		String append="";
+		for(char a : passwordInput.getPassword()) {
+			append+=a;
+		}
+		this.password = append;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+	
+	private void connectDB() {
+		try {
+			uc.connect();
+		} catch (Exception e) {
+			callErrorMessage("Error conectando a la base de datos.","Error de conección");
+		}
+	}
+
 	
 	public void initComponents() {
 		uc = new UserController();
@@ -143,76 +217,5 @@ public class Login extends JFrame implements Components{
 		respondToClick();
 	
 	}
-	
-	public void respondToClick() {
 		
-		loginBttn.addActionListener(new ActionListener() {
-			private EmpleadoHome eh;
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				
-				getInput();
-				if(isRoot()) {
-					eh = new EmpleadoHome();
-					dispose();
-				}else {
-					try {
-						if(canAccess()) {
-							uc.disconnet();
-							System.out.println("YASS BITCH");
-						}else {
-							uc.disconnet();
-							System.out.println("NAHH BITCH");
-						}
-					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-				}
-			}
-			
-		});
-		
-	}
-	
-	private boolean canAccess() throws SQLException {
-		connectDB();
-		return uc.canLog(username,password);
-	}
-	private boolean isRoot() {
-		if(username.equals("root") && password.equals("toor")) return true;
-		return false;
-	}
-	public void getInput() {
-		this.username = userInput.getText();
-		
-		String append="";
-		for(char a : passwordInput.getPassword()) {
-			append+=a;
-		}
-		
-		this.password = append;
-		
-//		JOptionPane.showMessageDialog(this, username+"\n"+password);
-		
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-	
-	private void connectDB() {
-		try {
-			uc.connect();
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(this, "Error conectando a la base de datos.",
-					"Error de conección",JOptionPane.ERROR_MESSAGE);
-		}
-	}
-
 }
