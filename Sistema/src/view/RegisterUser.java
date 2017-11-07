@@ -1,4 +1,4 @@
-package guicomponents;
+package view;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
@@ -78,24 +78,28 @@ public class RegisterUser extends JFrame implements Components{
 	//	SEPARATOR
 	private JSeparator separator;
 	private JSeparator jSeparator2;
+
+	
 	
 	public RegisterUser() {
 		super();
 		initComponents();
 	}
-		
+	
 	public void respondToClick() {
 		
 		registerBttn.addActionListener(new ActionListener() {
-			private EmpleadoHome eh;
+			EmpleadoHome eh;
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(!checkEmptyFields()) {
 					getInput();
 					callDatabase();
-					eh = new EmpleadoHome();
 					dispose();
+					
+					eh = new EmpleadoHome();
+					
 				}
 				else {
 					executeMessage();

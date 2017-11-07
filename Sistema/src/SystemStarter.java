@@ -1,4 +1,4 @@
-import guicomponents.Login;
+import view.Login;
 
 public class SystemStarter {
 

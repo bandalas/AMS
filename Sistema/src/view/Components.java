@@ -1,4 +1,4 @@
-package guicomponents;
+package view;
 
 public interface Components {
 	

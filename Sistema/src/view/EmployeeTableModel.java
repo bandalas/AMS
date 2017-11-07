@@ -1,23 +1,26 @@
-package guicomponents;
+package view;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 
+import controller.EmployeeController;
 import model.Employee;
 
 public class EmployeeTableModel extends AbstractTableModel{
 	
 	private List <Employee> db;
+	private EmployeeController ec = new EmployeeController();
 	private String[] colNames = {"Nomina", "Nombre", "Apellido Paterno", "Apellido Materno", "Fecha nacimiento", "Teléfono", "Dirección"};
 	
 	public EmployeeTableModel() {
 		fireTableDataChanged();
 	}
 	
-	public void setData(List<Employee>db) {
-		this.db = db;
+	public void setData(List<Employee>db) throws SQLException {
+		this.db = ec.getEmployee();
 		fireTableDataChanged();
 	}
 
@@ -25,6 +28,7 @@ public class EmployeeTableModel extends AbstractTableModel{
 	public int getRowCount() {
 		// TODO Auto-generated method stub
 		return db.size();
+		
 	}
 
 	@Override
@@ -38,7 +42,6 @@ public class EmployeeTableModel extends AbstractTableModel{
 		return colNames[column];
 	}
 	
-
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		// TODO Auto-generated method stub

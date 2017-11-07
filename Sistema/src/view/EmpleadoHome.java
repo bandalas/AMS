@@ -1,7 +1,8 @@
-package guicomponents;
+package view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -12,26 +13,39 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import controller.EmployeeController;
+import controller.UserController;
 import model.Employee;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class EmpleadoHome extends JFrame{
+	
 	 private JButton deleteBttn;
 	 private JButton editBttn;
 	 private JLabel jLabel1;
 	 private JButton registerBttn;
 	 private JScrollPane scrollTable;
 	 private EmployeeTablePanel tablePanel;
-	 
-	 //private EmployeeTableModel et;
 	 private EmployeeController ec;
+	 private UserController uc;
+	
 	
 	public EmpleadoHome() {
-		
 		super();
-		initComponents();
+		try {
+			initComponents();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+	}
 		
+
+	private void refresh() {
+		invalidate();
+		validate();
+		repaint();
 	}
 	
 	private void buttonEvents() {
@@ -41,10 +55,38 @@ public class EmpleadoHome extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				ru = new RegisterUser();
-				tablePanel.refresh();
+				dispose();
+				//tablePanel.refresh();
+				
 				
 			}
 		});
+		
+		
+		deleteBttn.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				EmpleadoHome eh;
+				int column = 0;
+				int row = tablePanel.getTable().getSelectedRow();
+				String id =tablePanel.getEtm().getValueAt(row, column).toString();
+				try {
+					ec.deleteEmployee(id);
+					uc.removeUser(id);
+					revalidate();
+					dispose();
+					new EmpleadoHome();
+					
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+			}
+			
+		});
+		
 		editBttn.addActionListener(new ActionListener() {
 
 			@Override
@@ -58,12 +100,10 @@ public class EmpleadoHome extends JFrame{
 			
 		});
 	}
-	
-	
-	
-	private void initComponents() {
-		ec = new EmployeeController();
 		
+	private void initComponents() throws SQLException {
+		ec = new EmployeeController();
+		uc = new UserController();
 		
         tablePanel = new EmployeeTablePanel();
         scrollTable = new JScrollPane();
@@ -74,7 +114,7 @@ public class EmpleadoHome extends JFrame{
         
         tablePanel.setData(ec.getEmployee());
         
-        tablePanel.refresh();
+        //tablePanel.refresh();
        
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -85,9 +125,9 @@ public class EmpleadoHome extends JFrame{
         
         registerBttn.setText("Nuevo");
 
-        deleteBttn.setText("Editar");
+        deleteBttn.setText("Eliminar");
 
-        editBttn.setText("Eliminar");
+        editBttn.setText("Editar");
 
         javax.swing.GroupLayout tablePanelLayout = new javax.swing.GroupLayout(tablePanel);
         tablePanel.setLayout(tablePanelLayout);

@@ -1,4 +1,4 @@
-package guicomponents;
+package view;
 
 import java.awt.BorderLayout;
 
