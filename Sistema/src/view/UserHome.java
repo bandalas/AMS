@@ -64,8 +64,8 @@ public class UserHome extends JFrame{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				UserHome uh;
-				int column = 0;
+				
+				int column = 1;
 				int row = tablePanel.getTable().getSelectedRow();
 				String id =tablePanel.getUtm().getValueAt(row, column).toString();
 				try {

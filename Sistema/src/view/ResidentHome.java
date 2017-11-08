@@ -9,7 +9,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 public class ResidentHome extends JFrame {
-	private JButton addBttn;
+	   private JButton addBttn;
 	   private JLabel addLbl;
 	   private JTable dataTable;
 	   private JButton deleteBttn;
@@ -17,7 +17,6 @@ public class ResidentHome extends JFrame {
 	   private JButton editBttn;
 	   private JLabel editLbl;
 	   private JLabel instructionLabel;
-	   private JMenu jMenu1;
 	   private JPanel menuPanel;
 	   private JButton refreshBttn;
 	   private JLabel refreshLbl;
@@ -28,7 +27,6 @@ public class ResidentHome extends JFrame {
 	    public ResidentHome() {
 	    		super();
 	    		initComponents();
- 		
 	    }
  
 	    private void initComponents() {
@@ -36,7 +34,6 @@ public class ResidentHome extends JFrame {
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			setVisible(true);
 	    			
-	        jMenu1 = new javax.swing.JMenu();
 	        menuPanel = new javax.swing.JPanel();
 	        editBttn = new JButton();
 	        addBttn = new JButton();

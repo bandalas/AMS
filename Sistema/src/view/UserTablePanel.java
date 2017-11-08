@@ -9,6 +9,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import model.User;
+import model.UserTableModel;
 
 
 public class UserTablePanel extends JPanel {

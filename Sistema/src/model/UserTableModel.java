@@ -1,4 +1,4 @@
-package view;
+package model;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -7,7 +7,6 @@ import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 
 import controller.UserController;
-import model.User;
 
 public class UserTableModel extends AbstractTableModel{
 	
