@@ -9,7 +9,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 public class ResidentHome extends JFrame {
-	 private JButton addBttn;
+	private JButton addBttn;
 	   private JLabel addLbl;
 	   private JTable dataTable;
 	   private JButton deleteBttn;
@@ -23,16 +23,19 @@ public class ResidentHome extends JFrame {
 	   private JLabel refreshLbl;
 	   private JScrollPane scrollPane;
 	   private JPanel tablePanel;
-   
+
 	    
 	    public ResidentHome() {
-    		super();
-    		initComponents();
-    		
+	    		super();
+	    		initComponents();
+ 		
 	    }
-    
+ 
 	    private void initComponents() {
-
+	  
+			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			setVisible(true);
+	    			
 	        jMenu1 = new javax.swing.JMenu();
 	        menuPanel = new javax.swing.JPanel();
 	        editBttn = new JButton();
@@ -48,18 +51,13 @@ public class ResidentHome extends JFrame {
 	        dataTable = new JTable();
 	        instructionLabel = new JLabel();
 
-	        jMenu1.setText("jMenu1");
+	        editBttn.setIcon(new javax.swing.ImageIcon("img/edit.png"));
 
-	        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+	        addBttn.setIcon(new javax.swing.ImageIcon("img/add.png")); 
+	       
+	        deleteBttn.setIcon(new javax.swing.ImageIcon("img/delete.png")); 
 
-	        editBttn.setIcon(new javax.swing.ImageIcon("/Users/kbandala/Documents/ITESM/Quinto Semestre/MTY/Análisis y Modelado de Sistemas de Software/Proyecto Final/Inter/edit.png")); // NOI18N
-
-	        addBttn.setIcon(new javax.swing.ImageIcon("/Users/kbandala/Documents/ITESM/Quinto Semestre/MTY/Análisis y Modelado de Sistemas de Software/Proyecto Final/Inter/add.png")); // NOI18N
-	        
-
-	        deleteBttn.setIcon(new javax.swing.ImageIcon("/Users/kbandala/Documents/ITESM/Quinto Semestre/MTY/Análisis y Modelado de Sistemas de Software/Proyecto Final/Inter/delete.png")); // NOI18N
-
-	        refreshBttn.setIcon(new javax.swing.ImageIcon("/Users/kbandala/Documents/ITESM/Quinto Semestre/MTY/Análisis y Modelado de Sistemas de Software/Proyecto Final/Inter/refresh.png")); // NOI18N
+	        refreshBttn.setIcon(new javax.swing.ImageIcon("img/refresh.png")); 
 
 	        addLbl.setFont(new java.awt.Font("Lucida Grande", 0, 10)); // NOI18N
 	        addLbl.setText("Agregar");
@@ -157,13 +155,13 @@ public class ResidentHome extends JFrame {
 	        tablePanel.setLayout(tablePanelLayout);
 	        tablePanelLayout.setHorizontalGroup(
 	            tablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-	            .addGroup(tablePanelLayout.createSequentialGroup()
-	                .addComponent(scrollPane)
-	                .addContainerGap())
 	            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tablePanelLayout.createSequentialGroup()
-	                .addGap(0, 547, Short.MAX_VALUE)
+	                .addGap(0, 0, 0)
 	                .addComponent(instructionLabel)
 	                .addGap(543, 543, 543))
+	            .addGroup(tablePanelLayout.createSequentialGroup()
+	                .addComponent(scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 1277, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 	        );
 	        tablePanelLayout.setVerticalGroup(
 	            tablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -179,20 +177,16 @@ public class ResidentHome extends JFrame {
 	        layout.setHorizontalGroup(
 	            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 	            .addComponent(menuPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-	            .addGroup(layout.createSequentialGroup()
-	                .addComponent(tablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-	                .addGap(0, 0, Short.MAX_VALUE))
+	            .addComponent(tablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
 	        );
 	        layout.setVerticalGroup(
 	            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 	            .addGroup(layout.createSequentialGroup()
 	                .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
 	                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-	                .addComponent(tablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-	                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+	                .addComponent(tablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
 	        );
 
 	        pack();
 	    }
-    
 }
