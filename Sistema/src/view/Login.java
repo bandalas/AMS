@@ -57,7 +57,7 @@ public class Login extends JFrame implements Components{
 	public void respondToClick() {
 		
 		loginBttn.addActionListener(new ActionListener() {
-			private EmpleadoHome eh;
+			private UserHome uh;
 			private ResidentHome s;
 
 			@Override
@@ -65,7 +65,7 @@ public class Login extends JFrame implements Components{
 				
 				getInput();
 				if(isRoot()) {
-					eh = new EmpleadoHome();
+					uh = new UserHome();
 					dispose();
 				}else {
 					try {

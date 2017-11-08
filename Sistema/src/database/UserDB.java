@@ -11,13 +11,13 @@ import model.Database;
 import model.User;
 
 public class UserDB {
-	
-	private ArrayList<User> user;
+
+	private ArrayList<User> userList;
 	private Database db;
 	private Connection con;
 
 	public UserDB() {
-		user = new ArrayList<User>();
+		userList = new ArrayList<User>();
 		db = new Database();
 		try {
 			db.connect();
@@ -27,68 +27,109 @@ public class UserDB {
 		}
 		this.con = db.getCon();
 	}
-	
+
 	public void saveUserTable() throws SQLException {
-		String checkQuery = checkIfExistsQuery("Users", "userID");
+		String checkQuery = checkIfExistsQuery("Users", "Username");
 		PreparedStatement checkStmt = con.prepareStatement(checkQuery);
-		
-		String insertQuery = "INSERT INTO Users (userID, password) VALUES (?, ?)";
+
+		String insertQuery = "INSERT INTO Users (Name, Username, Password, Phone) VALUES (?, ?, ?, ?)";
 		PreparedStatement insertStmt = con.prepareStatement(insertQuery);
-		
-		for (User u : user) {
-			String id = u.getRegistrationNumber();
-			checkStmt.setString(1, id);
-			
+
+		for (User user : userList) {
+			String username = user.getUsername();
+			checkStmt.setString(1, username);
+
 			ResultSet checkResult = checkStmt.executeQuery();
 			checkResult.next();
-			
+
 			int count = checkResult.getInt(1);
-			if(count == 0) {
-				System.out.println("Inserting user with ID: " +id);
-				
+			if (count == 0) {
+				System.out.println("Inserting user: " + username);
+
 				int col = 1;
-				insertStmt.setString(col++,id);
-				insertStmt.setString(col++, u.getPassword());
+				insertStmt.setString(col++, user.getName());
+				insertStmt.setString(col++, username);
+				insertStmt.setString(col++, user.getPassword());
+				insertStmt.setString(col++, user.getPhone());
 				insertStmt.executeUpdate();
 			} else {
-				System.out.println("Updating user with ID: "+id);
+				System.out.println("User already exists: " + username);
 			}
 		}
 		checkStmt.close();
-	
+
 	}
-	
+
 	public boolean canLogin(String username, String password) throws SQLException {
-		
-		String sql = "SELECT COUNT(*) as COUNT FROM Users WHERE userID='"+username+ "' AND password='"+password+"'";
+
+		String sql = "SELECT COUNT(*) as COUNT FROM Users WHERE Username='" + username + "' AND Password='" + password
+				+ "'";
 		Statement select = con.createStatement();
-		
+
 		ResultSet rs = select.executeQuery(sql);
 		rs.next();
 		int count = rs.getInt(1);
-		
-		if(count==1) return true;
-		
+
+		if (count == 1)
+			return true;
+
 		return false;
 	}
-	
-	public void addUser(User u) {
-		user.add(u);
+
+	public void addUser(User user) throws SQLException {
+		String checkQuery = checkIfExistsQuery("Users", "Username");
+		PreparedStatement checkStmt = con.prepareStatement(checkQuery);
+
+		String insertQuery = "INSERT INTO Users (Name, Username, Password, Phone) VALUES (?, ?, ?, ?)";
+		PreparedStatement insertStmt = con.prepareStatement(insertQuery);
+		
+		String username = user.getUsername();
+		checkStmt.setString(1, username);
+
+		ResultSet checkResult = checkStmt.executeQuery();
+		checkResult.next();
+
+		int count = checkResult.getInt(1);
+		if (count == 0) {
+			System.out.println("Inserting user: " + username);
+
+			int col = 1;
+			insertStmt.setString(col++, user.getName());
+			insertStmt.setString(col++, username);
+			insertStmt.setString(col++, user.getPassword());
+			insertStmt.setString(col++, user.getPhone());
+			insertStmt.executeUpdate();
+		} else {
+			System.out.println("User already exists: " + username);
+		}
+		checkStmt.close();
 	}
-	
-	public void deleteUser(String registrationNumber) throws SQLException {
-		String sql = "DELETE FROM Users WHERE userID=?";
+
+	public void deleteUser(String username) throws SQLException {
+		String sql = "DELETE FROM Users WHERE Username=?";
 		PreparedStatement checkStmt = con.prepareStatement(sql);
-		checkStmt.setString(1, registrationNumber);
+		checkStmt.setString(1, username);
 		checkStmt.executeUpdate();
 	}
-	
-	public ArrayList<User> getUser(){
-		return user;
+
+	public ArrayList<User> getUserTable() throws SQLException {
+		String sql = "SELECT * FROM Users";
+		Statement selectSt = con.createStatement();
+		
+		ResultSet rs = selectSt.executeQuery(sql);
+		while(rs.next()) {
+			String name = rs.getString("name");
+			String username = rs.getString("username");
+			String password = rs.getString("password");
+			String phone = rs.getString("phone");
+			userList.add(new User(name,username,password,phone));
+		}
+		return userList;
 	}
-	
-	private String checkIfExistsQuery(String table, String primaryKey) {
-		String s = "SELECT COUNT(*) as COUNT FROM " +table+" WHERE " +primaryKey + "=?";
+
+	private String checkIfExistsQuery(String table, String username) {
+		String s = "SELECT COUNT(*) as COUNT FROM " + table + " WHERE " + username + "=?";
 		return s;
 	}
+	
 }

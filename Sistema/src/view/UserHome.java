@@ -12,26 +12,23 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import controller.EmployeeController;
 import controller.UserController;
-import model.Employee;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class EmpleadoHome extends JFrame{
+public class UserHome extends JFrame{
 	
 	 private JButton deleteBttn;
 	 private JButton editBttn;
 	 private JLabel jLabel1;
 	 private JButton registerBttn;
 	 private JScrollPane scrollTable;
-	 private EmployeeTablePanel tablePanel;
-	 private EmployeeController ec;
+	 private UserTablePanel tablePanel;
 	 private UserController uc;
 	
 	
-	public EmpleadoHome() {
+	public UserHome() {
 		super();
 		try {
 			initComponents();
@@ -67,16 +64,15 @@ public class EmpleadoHome extends JFrame{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				EmpleadoHome eh;
+				UserHome uh;
 				int column = 0;
 				int row = tablePanel.getTable().getSelectedRow();
-				String id =tablePanel.getEtm().getValueAt(row, column).toString();
+				String id =tablePanel.getUtm().getValueAt(row, column).toString();
 				try {
-					ec.deleteEmployee(id);
 					uc.removeUser(id);
 					revalidate();
 					dispose();
-					new EmpleadoHome();
+					new UserHome();
 					
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
@@ -102,17 +98,16 @@ public class EmpleadoHome extends JFrame{
 	}
 		
 	private void initComponents() throws SQLException {
-		ec = new EmployeeController();
 		uc = new UserController();
 		
-        tablePanel = new EmployeeTablePanel();
+        tablePanel = new UserTablePanel();
         scrollTable = new JScrollPane();
         registerBttn = new JButton();
         deleteBttn = new JButton();
         editBttn = new JButton();
         jLabel1 = new JLabel();
         
-        tablePanel.setData(ec.getEmployee());
+        tablePanel.setData(uc.getUserTable());
         
         //tablePanel.refresh();
        
@@ -156,7 +151,7 @@ public class EmpleadoHome extends JFrame{
         );
 
         jLabel1.setFont(new java.awt.Font("Heiti SC", 0, 48)); // NOI18N
-        jLabel1.setText("Empleados Registrados");
+        jLabel1.setText("Usuarios Registrados");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

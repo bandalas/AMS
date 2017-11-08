@@ -21,21 +21,17 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
 import javax.swing.border.Border;
 
-import controller.EmployeeController;
 import controller.UserController;
 
 public class RegisterUser extends JFrame implements Components{
 	
 	//	DATABASE
-	private String name,lastName,secondLastName;
-	private String birthdate;
-	private String phoneNumber;
-	private String registrationNumber;
+	private String name;
+	private String username;
 	private String password;
-	private String address;
+	private String phone;
 	
 	//	CONTROLLER
-	private EmployeeController ec;
 	private UserController uc;
 	
 	//	PANELS
@@ -46,21 +42,14 @@ public class RegisterUser extends JFrame implements Components{
 	//	LABELS
 	private JLabel titleLabel;
 	private JLabel nameLabel;
-	private JLabel lastNameLabel;
-	private JLabel secondLastNameLabel;
-	private JLabel birthLabel;
 	private JLabel phoneLabel;
-	private JLabel addressLabel;
-	private JLabel nominaLabel;
+	private JLabel usernameLabel;
 	private JLabel passwordLabel;
 	private JLabel instructionLabel;
 	
 	//	TEXT FIELDS
 	private JTextField nameInput;
-	private JTextField lastNameInput;
-	private JTextField addressInput;
-	private JTextField secondLastNameInput;
-	private JTextField registeredNumberInput;
+	private JTextField usernameInput;
 	
 	private ArrayList<JTextField> jtf;
 	private ArrayList<JFormattedTextField> jftf;
@@ -69,7 +58,6 @@ public class RegisterUser extends JFrame implements Components{
 	private JPasswordField passwordInput;
 	
 	//	FORMATTED TEXT FIELDS
-	private JFormattedTextField birthInput;
 	private JFormattedTextField phoneInput;
 	
 	//	BUTTON
@@ -89,7 +77,7 @@ public class RegisterUser extends JFrame implements Components{
 	public void respondToClick() {
 		
 		registerBttn.addActionListener(new ActionListener() {
-			EmpleadoHome eh;
+			UserHome uh;
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -98,7 +86,7 @@ public class RegisterUser extends JFrame implements Components{
 					callDatabase();
 					dispose();
 					
-					eh = new EmpleadoHome();
+					uh = new UserHome();
 					
 				}
 				else {
@@ -118,12 +106,8 @@ public class RegisterUser extends JFrame implements Components{
 	public void getInput() {
 		
 		this.name = nameInput.getText();
-		this.lastName = lastNameInput.getText();
-		this.secondLastName = secondLastNameInput.getText();
-		this.birthdate = birthInput.getText();
-		this.phoneNumber = phoneInput.getText();
-		this.registrationNumber = registeredNumberInput.getText();
-		this.address = addressInput.getText();
+		this.phone = phoneInput.getText();
+		this.username = usernameInput.getText();
 		String pass = "";
 		for(char a : passwordInput.getPassword()) {
 			pass+=a;
@@ -146,8 +130,7 @@ public class RegisterUser extends JFrame implements Components{
 	private void callDatabase() {
 		connectDB();
 		try {
-			ec.addEmployee(registrationNumber, name, lastName, secondLastName, birthdate, phoneNumber,address);
-			uc.addUser(registrationNumber, password);
+			uc.addUser(name, username, password, phone);
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
@@ -156,7 +139,6 @@ public class RegisterUser extends JFrame implements Components{
 	
 	private void connectDB() {
 		try {
-			ec.connect();
 			uc.connect();
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(this, "Error conectando a la base de datos.",
@@ -170,59 +152,40 @@ public class RegisterUser extends JFrame implements Components{
 		setLayout(new BorderLayout());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		ec = new EmployeeController();
 		uc = new UserController();
 		
 		employeePanel = new JPanel();
         separator = new JSeparator();
         titleLabel = new JLabel();
         nameLabel = new JLabel();
-        lastNameLabel = new JLabel();
         nameInput = new JTextField();
-        lastNameInput = new JTextField();
-        birthLabel = new JLabel();
-        birthInput = new JFormattedTextField(new SimpleDateFormat ("dd/MM/yyyy"));
-        birthInput.setValue(new java.util.Date());
         phoneLabel = new JLabel();
-        addressLabel = new JLabel();
-        addressInput = new JTextField();
-        secondLastNameLabel = new JLabel();
-        secondLastNameInput = new JTextField();
         phoneInput = new JFormattedTextField();
         jSeparator2 = new JSeparator();
         userPanel = new JPanel();
         insideUserPanel = new JPanel();
-        nominaLabel = new JLabel();
         passwordLabel = new JLabel();
         passwordInput = new JPasswordField();
         registerBttn = new JButton();
         instructionLabel = new JLabel();
-        registeredNumberInput = new JTextField();
+        usernameInput = new JTextField();
+        usernameLabel = new JLabel();
         
         jtf = new ArrayList<JTextField>();
-        jtf.add(nameInput);
-        jtf.add(lastNameInput);
-        jtf.add(addressInput);
-        jtf.add(secondLastNameInput);
-        jtf.add(registeredNumberInput);
+        jtf.add(usernameInput);
         
         jftf = new ArrayList<JFormattedTextField>();
-        jftf.add(birthInput);
         jftf.add(phoneInput);
         
 		
         titleLabel.setFont(new java.awt.Font("Lucida Grande", 0, 14)); 
-        titleLabel.setText("REGISTRO EMPLEADO");
-        nameLabel.setText("Nombre(s) *");
-        lastNameLabel.setText("Apellido Paterno *");
-        birthLabel.setText("Nacimiento *");
+        titleLabel.setText("REGISTRO USUARIO");
+        nameLabel.setText("Nombre *");
         phoneLabel.setText("Telefono *");
-        addressLabel.setText("Dirección *");
-        secondLastNameLabel.setText("Apellido Materno *");
-        nominaLabel.setText("Nomina *");
-        passwordLabel.setText("Contraseña *");
+        usernameLabel.setText("Usuario *");
+        passwordLabel.setText("Contrasena *");
         registerBttn.setText("Registrar");
-        instructionLabel.setText("Asignar la nomina y contraseña con la que el empleado tendrá acceso.");
+        instructionLabel.setText("Asignar el usuario y contrasena con la que el empleado tendra acceso.");
 		
         GroupLayout employeePanelLayout = new GroupLayout(employeePanel);
         
@@ -244,26 +207,13 @@ public class RegisterUser extends JFrame implements Components{
                         .addGroup(employeePanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
                             .addGroup(employeePanelLayout.createSequentialGroup()
                                 .addGroup(employeePanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(birthLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(phoneLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(addressLabel, GroupLayout.PREFERRED_SIZE, 117, GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(phoneLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGroup(employeePanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                    .addComponent(addressInput)
                                     .addComponent(phoneInput, GroupLayout.PREFERRED_SIZE, 188, GroupLayout.PREFERRED_SIZE)))
                             .addGroup(employeePanelLayout.createSequentialGroup()
                                 .addComponent(nameLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(nameInput, GroupLayout.PREFERRED_SIZE, 321, GroupLayout.PREFERRED_SIZE))
-                            .addGroup(GroupLayout.Alignment.TRAILING, employeePanelLayout.createSequentialGroup()
-                                .addGroup(employeePanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                    .addComponent(secondLastNameLabel, GroupLayout.Alignment.LEADING)
-                                    .addComponent(lastNameLabel, GroupLayout.PREFERRED_SIZE, 117, GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(employeePanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(lastNameInput, GroupLayout.PREFERRED_SIZE, 321, GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(secondLastNameInput, GroupLayout.PREFERRED_SIZE, 321, GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(birthInput, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE))))))
+                                .addComponent(nameInput, GroupLayout.PREFERRED_SIZE, 321, GroupLayout.PREFERRED_SIZE)))))
                 .addGap(0, 49, Short.MAX_VALUE))
         );
         employeePanelLayout.setVerticalGroup(
@@ -277,26 +227,11 @@ public class RegisterUser extends JFrame implements Components{
                 .addGroup(employeePanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                     .addComponent(nameLabel)
                     .addComponent(nameInput, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(employeePanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                    .addComponent(lastNameLabel)
-                    .addComponent(lastNameInput, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(employeePanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                    .addComponent(secondLastNameLabel)
-                    .addComponent(secondLastNameInput, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                 .addGap(7, 7, 7)
-                .addGroup(employeePanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                    .addComponent(birthLabel)
-                    .addComponent(birthInput, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(employeePanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                     .addComponent(phoneLabel)
                     .addComponent(phoneInput, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                 .addGap(17, 17, 17)
-                .addGroup(employeePanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                    .addComponent(addressLabel)
-                    .addComponent(addressInput, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
@@ -308,11 +243,11 @@ public class RegisterUser extends JFrame implements Components{
             .addGroup(insideUserPanelLayout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addGroup(insideUserPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                    .addComponent(nominaLabel, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(usernameLabel, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE)
                     .addComponent(passwordLabel))
                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(insideUserPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                    .addComponent(registeredNumberInput)
+                    .addComponent(usernameInput)
                     .addComponent(passwordInput, GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE))
                 .addGap(21, 21, 21))
             .addComponent(registerBttn, GroupLayout.Alignment.TRAILING)
@@ -322,8 +257,8 @@ public class RegisterUser extends JFrame implements Components{
             .addGroup(insideUserPanelLayout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addGroup(insideUserPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                    .addComponent(nominaLabel)
-                    .addComponent(registeredNumberInput, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                    .addComponent(usernameLabel)
+                    .addComponent(usernameInput, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(insideUserPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                     .addComponent(passwordInput, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
