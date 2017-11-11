@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.17, for macos10.12 (x86_64)
 --
 -- Host: localhost    Database: hospitalito
 -- ------------------------------------------------------
--- Server version	5.7.20-log
+-- Server version	5.7.19
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -23,7 +23,7 @@ DROP TABLE IF EXISTS `residents`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `residents` (
-  `ResidentID` int(11) NOT NULL AUTO_INCREMENT,
+  `ResidentID` varchar(50) NOT NULL,
   `FirstName` varchar(50) DEFAULT NULL,
   `LastName` varchar(50) DEFAULT NULL,
   `DateOfBirth` date DEFAULT NULL,
@@ -40,6 +40,7 @@ CREATE TABLE `residents` (
 
 LOCK TABLES `residents` WRITE;
 /*!40000 ALTER TABLE `residents` DISABLE KEYS */;
+INSERT INTO `residents` VALUES ('AROB20171110','Ariadna','Robledo Bandala','2017-11-10','VIVO','10','1');
 /*!40000 ALTER TABLE `residents` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-07 21:37:05
+-- Dump completed on 2017-11-10 22:13:06

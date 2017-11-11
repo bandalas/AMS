@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.17, for macos10.12 (x86_64)
 --
 -- Host: localhost    Database: hospitalito
 -- ------------------------------------------------------
--- Server version	5.7.20-log
+-- Server version	5.7.19
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -28,9 +28,7 @@ CREATE TABLE `absences` (
   `StartDate` date DEFAULT NULL,
   `EndDate` date DEFAULT NULL,
   `Reason` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`AbsenceID`),
-  KEY `ResidentID` (`ResidentID`),
-  CONSTRAINT `absences_ibfk_1` FOREIGN KEY (`ResidentID`) REFERENCES `residents` (`ResidentID`)
+  PRIMARY KEY (`AbsenceID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -52,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-07 21:37:05
+-- Dump completed on 2017-11-10 22:13:05
