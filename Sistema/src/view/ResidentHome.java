@@ -1,17 +1,26 @@
 package view;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+import controller.ResidentController;
+
 public class ResidentHome extends JFrame {
+	
 	   private JButton addBttn;
 	   private JLabel addLbl;
-	   private JTable dataTable;
+	   private ResidentTablePanel tablePanel;
 	   private JButton deleteBttn;
 	   private JLabel deleteLbl;
 	   private JButton editBttn;
@@ -21,15 +30,95 @@ public class ResidentHome extends JFrame {
 	   private JButton refreshBttn;
 	   private JLabel refreshLbl;
 	   private JScrollPane scrollPane;
-	   private JPanel tablePanel;
-
+	   private ResidentController rc;
 	    
 	    public ResidentHome() {
 	    		super();
-	    		initComponents();
+	    		try {
+					initComponents();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 	    }
- 
-	    private void initComponents() {
+	    
+	    public void bttnEvents() {
+	    	
+	    		addBttn.addActionListener(new ActionListener() {
+
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						new RegisterResident(false);
+						dispose();
+					}
+					
+	    		});
+	    		
+	    		deleteBttn.addActionListener(new ActionListener() {
+	    			ArrayList<String> list = new ArrayList<String>();
+	    			String date = "";
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						
+						if(tablePanel.getTable().getSelectedRow()>=0) {
+							int row = tablePanel.getTable().getSelectedRow();
+							for(int i=0; i<2;i++) {
+								String id = tablePanel.getRtm().getValueAt(row, i).toString();
+								list.add(id);
+							}
+							date = tablePanel.getRtm().getValueAt(row, 2).toString();
+							String id = rc.idConverter(list, date);
+							
+							try {
+								rc.deleteResident(id);
+								dispose();
+								new ResidentHome();
+							} catch (SQLException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+							
+						}else {
+							executeMessage();
+						}
+					}
+	    			
+	    		});
+	    
+	    		editBttn.addActionListener(new ActionListener() {
+
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						// TODO Auto-generated method stub
+						ArrayList<String> list = new ArrayList<String>();
+		    				String date = "";
+						if(tablePanel.getTable().getSelectedRow()>=0) {
+							int row = tablePanel.getTable().getSelectedRow();
+							
+							for(int i=0; i<2;i++) {
+								String id = tablePanel.getRtm().getValueAt(row, i).toString();
+								list.add(id);
+							}
+							
+							date = tablePanel.getRtm().getValueAt(row, 2).toString();
+							String id = rc.idConverter(list, date);
+							new RegisterResident(true,id);
+						
+							
+						}else {
+							executeMessage();
+						}
+					}
+	    			
+	    		});
+	    }
+	    
+	    private void executeMessage() {
+			JOptionPane.showMessageDialog(this, "Seleccione un residente.",
+					"Error",JOptionPane.ERROR_MESSAGE);
+		}
+	    
+ 	    private void initComponents() throws SQLException {
 	  
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			setVisible(true);
@@ -43,10 +132,15 @@ public class ResidentHome extends JFrame {
 	        editLbl = new JLabel();
 	        deleteLbl = new JLabel();
 	        refreshLbl = new JLabel();
-	        tablePanel = new JPanel();
 	        scrollPane = new JScrollPane();
-	        dataTable = new JTable();
 	        instructionLabel = new JLabel();
+	        tablePanel = new ResidentTablePanel();
+	        rc = new ResidentController();
+	        
+	        tablePanel.setData(rc.getUserTable());
+	        
+	        scrollPane.setViewportView(tablePanel.getTable());
+
 
 	        editBttn.setIcon(new javax.swing.ImageIcon("img/edit.png"));
 
@@ -125,27 +219,7 @@ public class ResidentHome extends JFrame {
 	                        .addGap(0, 0, Short.MAX_VALUE))))
 	        );
 
-	        dataTable.setModel(new javax.swing.table.DefaultTableModel(
-	            new Object [][] {
-	                {null, null, null, null},
-	                {null, null, null, null},
-	                {null, null, null, null},
-	                {null, null, null, null}
-	            },
-	            new String [] {
-	                "Title 1", "Title 2", "Title 3", "Title 4"
-	            }
-	        ) {
-	            boolean[] canEdit = new boolean [] {
-	                false, false, false, false
-	            };
-
-	            public boolean isCellEditable(int rowIndex, int columnIndex) {
-	                return canEdit [columnIndex];
-	            }
-	        });
-	        scrollPane.setViewportView(dataTable);
-
+	      
 	        instructionLabel.setText("Doble Click para más información");
 
 	        javax.swing.GroupLayout tablePanelLayout = new javax.swing.GroupLayout(tablePanel);
@@ -185,5 +259,8 @@ public class ResidentHome extends JFrame {
 	        );
 
 	        pack();
+	        bttnEvents();
+	        
 	    }
+
 }

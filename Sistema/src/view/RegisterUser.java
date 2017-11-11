@@ -68,7 +68,6 @@ public class RegisterUser extends JFrame implements Components{
 	private JSeparator jSeparator2;
 
 	
-	
 	public RegisterUser() {
 		super();
 		initComponents();

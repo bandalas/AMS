@@ -8,7 +8,6 @@ import model.Database;
 import model.User;
 
 public class UserController {
-	Database db = new Database();
 	UserDB udb = new UserDB();
 	
 	public ArrayList<User> getUserTable() throws SQLException {
@@ -20,25 +19,22 @@ public class UserController {
 	}
 	
 	public void connect() throws Exception {
-		db.connect();
+		udb.connect();
 	}
 	
-	public void disconnet() {
-		db.disconnect();
-	}
-	
-	public void load() {
-		
+	public void disconnect() {
+		udb.disconnect();
 	}
 	
 	public boolean canLog(String username, String password) throws SQLException {
 		return udb.canLogin(username, password);
 	}
+	
 	public void addUser(String name, String username, String password, String phone) throws SQLException {		
 		User u = new User(name, username, password, phone);
 	
 		udb.addUser(u);
-		db.disconnect();
+		disconnect();
 	}
 
 }

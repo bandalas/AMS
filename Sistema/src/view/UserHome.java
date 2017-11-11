@@ -46,6 +46,7 @@ public class UserHome extends JFrame{
 	}
 	
 	private void buttonEvents() {
+		
 		registerBttn.addActionListener(new ActionListener() {
 			private RegisterUser ru;
 
@@ -58,7 +59,6 @@ public class UserHome extends JFrame{
 				
 			}
 		});
-		
 		
 		deleteBttn.addActionListener(new ActionListener() {
 
@@ -88,16 +88,15 @@ public class UserHome extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				tablePanel.refresh();
-				/*int column = 0;
-				int row = employeeTable.getSelectedRow();
-				System.out.println(employeeTable.getModel().getValueAt(row, column).toString());*/
 				
 			}
 			
 		});
+	
 	}
 		
 	private void initComponents() throws SQLException {
+		
 		uc = new UserController();
 		
         tablePanel = new UserTablePanel();
@@ -109,9 +108,6 @@ public class UserHome extends JFrame{
         
         tablePanel.setData(uc.getUserTable());
         
-        //tablePanel.refresh();
-       
-
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         scrollTable.setViewportView(tablePanel.getTable());

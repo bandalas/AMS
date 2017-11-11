@@ -10,54 +10,22 @@ import java.util.ArrayList;
 import model.Database;
 import model.User;
 
-public class UserDB {
+public class UserDB extends Database{
 
 	private ArrayList<User> userList;
-	private Database db;
 	private Connection con;
 
 	public UserDB() {
+		
 		userList = new ArrayList<User>();
-		db = new Database();
 		try {
-			db.connect();
+			connect();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		this.con = db.getCon();
-	}
-
-	public void saveUserTable() throws SQLException {
-		String checkQuery = checkIfExistsQuery("Users", "Username");
-		PreparedStatement checkStmt = con.prepareStatement(checkQuery);
-
-		String insertQuery = "INSERT INTO Users (Name, Username, Password, Phone) VALUES (?, ?, ?, ?)";
-		PreparedStatement insertStmt = con.prepareStatement(insertQuery);
-
-		for (User user : userList) {
-			String username = user.getUsername();
-			checkStmt.setString(1, username);
-
-			ResultSet checkResult = checkStmt.executeQuery();
-			checkResult.next();
-
-			int count = checkResult.getInt(1);
-			if (count == 0) {
-				System.out.println("Inserting user: " + username);
-
-				int col = 1;
-				insertStmt.setString(col++, user.getName());
-				insertStmt.setString(col++, username);
-				insertStmt.setString(col++, user.getPassword());
-				insertStmt.setString(col++, user.getPhone());
-				insertStmt.executeUpdate();
-			} else {
-				System.out.println("User already exists: " + username);
-			}
-		}
-		checkStmt.close();
-
+		this.con = getCon();
+		
 	}
 
 	public boolean canLogin(String username, String password) throws SQLException {
@@ -74,6 +42,7 @@ public class UserDB {
 			return true;
 
 		return false;
+		
 	}
 
 	public void addUser(User user) throws SQLException {

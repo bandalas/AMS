@@ -71,11 +71,12 @@ public class Login extends JFrame implements Components{
 					try {
 						if(canAccess()) {
 							s = new ResidentHome();
-							uc.disconnet();
+							uc.disconnect();
+							dispose();
 						
 						}else {
 							callErrorMessage("Los datos ingresados son incorrectos","Datos incorrectos");
-							uc.disconnet();
+							uc.disconnect();
 						}
 					} catch (SQLException e1) {
 						e1.printStackTrace();
@@ -209,10 +210,6 @@ public class Login extends JFrame implements Components{
         
         setLocationRelativeTo(null);
 		setVisible(true);
-		
-		
-	//	getRootPane().setDefaultButton(loginBttn);
-	//	loginBttn.requestFocus();
 		
 		respondToClick();
 	
