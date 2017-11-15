@@ -7,16 +7,13 @@ import java.sql.SQLException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 
 import controller.UserController;
 
-import java.util.ArrayList;
-import java.util.List;
-
+/**
+ * Displays the interface for the adminstrator.
+ */
 public class UserHome extends JFrame{
 	
 	 private JButton deleteBttn;
@@ -106,7 +103,7 @@ public class UserHome extends JFrame{
         editBttn = new JButton();
         jLabel1 = new JLabel();
         
-        tablePanel.setData(uc.getUserTable());
+        tablePanel.setData();
         
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 

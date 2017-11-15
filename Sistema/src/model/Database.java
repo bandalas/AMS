@@ -4,14 +4,25 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Connection;
 
+/**
+ * Connecting to the database.
+ */
 public class Database {
 	
-	public Connection con;
+	private Connection con;
+	
+	public void setCon(Connection con) {
+		this.con = con;
+	}
 	
 	public Connection getCon() {
 		return con;
 	}
 
+	/**
+	 * Connects to the database.
+	 * @throws Exception error
+	 */
 	public void connect()  throws Exception{
 		
 		if(con!=null) return;
@@ -27,6 +38,9 @@ public class Database {
 	
 	}
 	
+	/**
+	 * Disconnects from the database.
+	 */
 	public void disconnect() {
 		if(con!=null) {
 			try {

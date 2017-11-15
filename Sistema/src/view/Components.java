@@ -1,5 +1,8 @@
 package view;
 
+/**
+ * Defines the required components.
+ */
 public interface Components {
 	
 	public void initComponents();

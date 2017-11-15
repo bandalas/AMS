@@ -7,17 +7,28 @@ import javax.swing.table.AbstractTableModel;
 
 import controller.ResidentController;
 
+/**
+ * Model of the resident table displayed when a user logs in.
+ */
 public class ResidentTableModel extends AbstractTableModel{
-	
+
 	private List <Resident> db;
 	private ResidentController rc = new ResidentController();
 	private String[] colNames = {"Nombre", "Apellidos", "Fecha de Nacimiento","Habitación", "Número de cama"};
-
+	
+	
+	/**
+	 * Updates the table after a change.
+	 */
 	public ResidentTableModel() {
 		fireTableDataChanged();
 	}
 	
-	public void setData(List<Resident>db) throws SQLException {
+	/**
+	 * Saves the resident table.
+	 * @throws SQLException error
+	 */
+	public void setData() throws SQLException {
 		this.db = rc.getUserTable();
 		fireTableDataChanged();
 	}

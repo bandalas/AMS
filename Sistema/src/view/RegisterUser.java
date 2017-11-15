@@ -23,6 +23,9 @@ import javax.swing.border.Border;
 
 import controller.UserController;
 
+/**
+ * For registering a new user.
+ */
 public class RegisterUser extends JFrame implements Components{
 	
 	//	DATABASE
@@ -68,6 +71,9 @@ public class RegisterUser extends JFrame implements Components{
 	private JSeparator jSeparator2;
 
 	
+	/**
+	 * Registers a new user.
+	 */
 	public RegisterUser() {
 		super();
 		initComponents();

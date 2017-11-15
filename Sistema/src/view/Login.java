@@ -12,22 +12,26 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
-import javax.swing.border.TitledBorder;
 
 import controller.UserController;
 
 import javax.swing.border.*;
 
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
-import javax.swing.JOptionPane;
 
 
-
+/**
+ * For logging in to the system.
+ */
 public class Login extends JFrame implements Components{
+	
+	/**
+	 * The user that is currently logged in.
+	 */
+	public static String loggedUser;
 	
 	//	DATABASE
 	private String username;
@@ -70,6 +74,7 @@ public class Login extends JFrame implements Components{
 				}else {
 					try {
 						if(canAccess()) {
+							Login.loggedUser = username;
 							s = new ResidentHome();
 							uc.disconnect();
 							dispose();
@@ -92,6 +97,7 @@ public class Login extends JFrame implements Components{
 		connectDB();
 		return uc.canLog(username,password);
 	}
+	
 	private boolean isRoot() {
 		if(username.equals("root") && password.equals("toor")) return true;
 		return false;
@@ -119,6 +125,9 @@ public class Login extends JFrame implements Components{
 		return password;
 	}
 	
+	/**
+	 * Connects to the database.
+	 */
 	private void connectDB() {
 		try {
 			uc.connect();

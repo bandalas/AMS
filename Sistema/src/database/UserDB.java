@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import model.Database;
 import model.User;
 
+/**
+ * Connects to the users table.
+ */
 public class UserDB extends Database{
 
 	private ArrayList<User> userList;
@@ -28,6 +31,13 @@ public class UserDB extends Database{
 		
 	}
 
+	/**
+	 * Checks if a username/password combination is correct.
+	 * @param username Username.
+	 * @param password Password.
+	 * @return Whether a username/password combination is correct.
+	 * @throws SQLException error.
+	 */
 	public boolean canLogin(String username, String password) throws SQLException {
 
 		String sql = "SELECT COUNT(*) as COUNT FROM Users WHERE Username='" + username + "' AND Password='" + password
@@ -45,6 +55,11 @@ public class UserDB extends Database{
 		
 	}
 
+	/**
+	 * Adds a user to the database.
+	 * @param user The user.
+	 * @throws SQLException error
+	 */
 	public void addUser(User user) throws SQLException {
 		String checkQuery = checkIfExistsQuery("Users", "Username");
 		PreparedStatement checkStmt = con.prepareStatement(checkQuery);
@@ -74,6 +89,11 @@ public class UserDB extends Database{
 		checkStmt.close();
 	}
 
+	/**
+	 * Deletes a user from the database.
+	 * @param username Username.
+	 * @throws SQLException error
+	 */
 	public void deleteUser(String username) throws SQLException {
 		String sql = "DELETE FROM Users WHERE Username=?";
 		PreparedStatement checkStmt = con.prepareStatement(sql);
@@ -81,6 +101,11 @@ public class UserDB extends Database{
 		checkStmt.executeUpdate();
 	}
 
+	/**
+	 * Gets the users table from the database.
+	 * @return The users table.
+	 * @throws SQLException
+	 */
 	public ArrayList<User> getUserTable() throws SQLException {
 		String sql = "SELECT * FROM Users";
 		Statement selectSt = con.createStatement();

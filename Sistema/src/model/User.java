@@ -1,11 +1,21 @@
 package model;
 
+/**
+ * User.
+ */
 public class User {
+
 	private String name;
 	private String username;
 	private String password;
 	private String phone;
 	
+	/**
+	 * @param name Name.
+	 * @param username Username (used to log in).
+	 * @param password Password.
+	 * @param phone Phone number.
+	 */
 	public User(String name, String username, String password, String phone) {
 		this.setName(name);
 		this.setUsername(username);

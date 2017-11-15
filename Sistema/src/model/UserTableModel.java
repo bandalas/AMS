@@ -3,22 +3,31 @@ package model;
 import java.sql.SQLException;
 import java.util.List;
 
-import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 
 import controller.UserController;
 
+/**
+ * Model of the users table displayed when the administrator (root) logs in.
+ */
 public class UserTableModel extends AbstractTableModel{
 	
 	private List <User> db;
 	private UserController uc = new UserController();
 	private String[] colNames = {"Nombre", "Usuario", "Contrasena", "Telefono"};
 	
+	/**
+	 * Updates the table after a change.
+	 */
 	public UserTableModel() {
 		fireTableDataChanged();
 	}
 	
-	public void setData(List<User>db) throws SQLException {
+	/**
+	 * Saves the user table in db.
+	 * @throws SQLException error
+	 */
+	public void setData() throws SQLException {
 		this.db = uc.getUserTable();
 		fireTableDataChanged();
 	}

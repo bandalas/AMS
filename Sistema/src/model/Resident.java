@@ -2,8 +2,11 @@ package model;
 
 import java.util.Date;
 
+/**
+ * Resident.
+ */
 public class Resident {
-	
+
 	private String id;
 	private String firstName;
 	private String lastName;
@@ -12,6 +15,15 @@ public class Resident {
 	private String room;
 	private String bed;
 	
+	/**
+	 * @param id Auto generated id.
+	 * @param firstName First name.
+	 * @param lastName Last name.
+	 * @param birthDate Birth date.
+	 * @param status Status (death or alive).
+	 * @param room Room in which the resident stays.
+	 * @param bed Bed in which the resident sleeps.
+	 */
 	public Resident(String id, String firstName, String lastName, Date birthDate, 
 			String status, String room, String bed) {
 		

@@ -8,14 +8,15 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JMenu;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTable;
 
 import controller.ResidentController;
 
+/**
+ * Displays the interface for a logged in user.
+ */
 public class ResidentHome extends JFrame {
 	
 	   private JButton addBttn;
@@ -137,7 +138,7 @@ public class ResidentHome extends JFrame {
 	        tablePanel = new ResidentTablePanel();
 	        rc = new ResidentController();
 	        
-	        tablePanel.setData(rc.getUserTable());
+	        tablePanel.setData();
 	        
 	        scrollPane.setViewportView(tablePanel.getTable());
 

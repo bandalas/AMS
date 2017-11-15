@@ -20,6 +20,9 @@ import javax.swing.JTextField;
 
 import controller.ResidentController;
 
+/**
+ * For registering a new resident.
+ */
 public class RegisterResident extends JFrame{
 	                   
     //DATABASE
@@ -63,12 +66,21 @@ public class RegisterResident extends JFrame{
     private boolean isEnabled;
     private String id;
 	
+	/**
+	 * Registers a new resident.
+	 * @param status The status of the interface.
+	 */
 	public RegisterResident(boolean status) {
 		super();
 		this.isEnabled = status;
 		startProgram();
 	}
 	
+	/**
+	 * Registers a new resident.
+	 * @param status The status of the interface.
+	 * @param id The id of the resident.
+	 */
 	public RegisterResident(boolean status, String id) {
 		super();
 		this.isEnabled = status;
@@ -200,7 +212,7 @@ public class RegisterResident extends JFrame{
         		
         		statusLbl.setVisible(true);
         		statusComboBx.setVisible(true);
-        		ArrayList<String> residentData = rc.getResident(id);
+        		ArrayList<String> residentData = rc.getResidentAsArray(id);
         		String[] lastNames = residentData.get(1).split(" ");
         		nameInput.setText(residentData.get(0));
         		String txt = "";
