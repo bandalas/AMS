@@ -4,13 +4,11 @@ package model;
  * A resident's medicines.
  */
 public class Medicine {
-	private int medicineid;
-	private int prescriptionid;
+
 	private String name;
 	private int duration;
 	private Double dose;
-	private int frequence;
-	private String indications;
+
 	
 	/**
 	 * @param medicineid  Auto generated id.
@@ -21,29 +19,16 @@ public class Medicine {
 	 * @param frequence How often (in days) should the resident take the dose.
 	 * @param indications General indications.
 	 */
-	public Medicine(int medicineid, int prescriptionid, String name, int duration, Double dose, int frequence, String indications ) {
-		this.setMedicineid(medicineid);
-		this.setPrescriptionid(prescriptionid);
+	public Medicine(String name, int duration, Double dose) {
+		this.name = name;
 		this.setDuration(duration);
 		this.setDose(dose);
-		this.setFrequence(frequence);
-		this.setIndications(indications);
 	}
 
-	public int getMedicineid() {
-		return medicineid;
-	}
 
-	public void setMedicineid(int medicineid) {
-		this.medicineid = medicineid;
-	}
 
-	public int getPrescriptionid() {
-		return prescriptionid;
-	}
-
-	public void setPrescriptionid(int prescriptionid) {
-		this.prescriptionid = prescriptionid;
+	public Medicine() {
+		// TODO Auto-generated constructor stub
 	}
 
 	public String getName() {
@@ -70,19 +55,5 @@ public class Medicine {
 		this.dose = dose;
 	}
 
-	public int getFrequence() {
-		return frequence;
-	}
 
-	public void setFrequence(int frequence) {
-		this.frequence = frequence;
-	}
-
-	public String getIndications() {
-		return indications;
-	}
-
-	public void setIndications(String indications) {
-		this.indications = indications;
-	}
 }

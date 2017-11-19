@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import controller.ResidentController;
+import controller.ViewDataController;
 
 /**
  * Displays the interface for a logged in user.
@@ -32,6 +33,8 @@ public class ResidentHome extends JFrame {
 	   private JLabel refreshLbl;
 	   private JScrollPane scrollPane;
 	   private ResidentController rc;
+	   private javax.swing.JButton viewBttn;
+	   private javax.swing.JLabel deleteLbl1;
 	    
 	    public ResidentHome() {
 	    		super();
@@ -44,7 +47,7 @@ public class ResidentHome extends JFrame {
 	    }
 	    
 	    public void bttnEvents() {
-	    	
+	    		tablePanel.tableListener();
 	    		addBttn.addActionListener(new ActionListener() {
 
 					@Override
@@ -112,6 +115,33 @@ public class ResidentHome extends JFrame {
 					}
 	    			
 	    		});
+	    		
+	    		viewBttn.addActionListener(new ActionListener() {
+
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						// TODO Auto-generated method stub
+						ArrayList<String> list = new ArrayList<String>();
+		    				String date = "";
+						if(tablePanel.getTable().getSelectedRow()>=0) {
+							int row = tablePanel.getTable().getSelectedRow();
+							
+							for(int i=0; i<2;i++) {
+								String id = tablePanel.getRtm().getValueAt(row, i).toString();
+								list.add(id);
+							}
+							
+							date = tablePanel.getRtm().getValueAt(row, 2).toString();
+							String id = rc.idConverter(list, date);
+							new ViewData(id);
+						
+							
+						}else {
+							executeMessage();
+						}
+					}
+	    			
+	    		});
 	    }
 	    
 	    private void executeMessage() {
@@ -137,6 +167,8 @@ public class ResidentHome extends JFrame {
 	        instructionLabel = new JLabel();
 	        tablePanel = new ResidentTablePanel();
 	        rc = new ResidentController();
+	        viewBttn = new javax.swing.JButton();
+	        deleteLbl1 = new JLabel();
 	        
 	        tablePanel.setData();
 	        
@@ -150,7 +182,8 @@ public class ResidentHome extends JFrame {
 	        deleteBttn.setIcon(new javax.swing.ImageIcon("img/delete.png")); 
 
 	        refreshBttn.setIcon(new javax.swing.ImageIcon("img/refresh.png")); 
-
+	        viewBttn.setIcon(new javax.swing.ImageIcon("img/refresh.png"));
+	        
 	        addLbl.setFont(new java.awt.Font("Lucida Grande", 0, 10)); // NOI18N
 	        addLbl.setText("Agregar");
 
@@ -161,6 +194,9 @@ public class ResidentHome extends JFrame {
 	        deleteLbl.setFont(new java.awt.Font("Lucida Grande", 0, 10)); // NOI18N
 	        deleteLbl.setText("Eliminar");
 	        deleteLbl.setPreferredSize(new java.awt.Dimension(45, 16));
+	        deleteLbl1.setFont(new java.awt.Font("Lucida Grande", 0, 10)); // NOI18N
+	        deleteLbl1.setText("Ver");
+	        deleteLbl1.setPreferredSize(new java.awt.Dimension(45, 16));
 
 	        refreshLbl.setFont(new java.awt.Font("Lucida Grande", 0, 10)); // NOI18N
 	        refreshLbl.setText("Actualizar");
@@ -186,10 +222,15 @@ public class ResidentHome extends JFrame {
 	                        .addComponent(editLbl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
 	                        .addGap(18, 18, 18)))
 	                .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-	                    .addComponent(deleteBttn)
+	                    .addGroup(menuPanelLayout.createSequentialGroup()
+	                        .addComponent(deleteBttn)
+	                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+	                        .addComponent(viewBttn))
 	                    .addGroup(menuPanelLayout.createSequentialGroup()
 	                        .addGap(6, 6, 6)
-	                        .addComponent(deleteLbl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+	                        .addComponent(deleteLbl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+	                        .addComponent(deleteLbl1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
 	                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 	                .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 	                    .addComponent(refreshBttn)
@@ -206,29 +247,26 @@ public class ResidentHome extends JFrame {
 	                        .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 	                            .addComponent(addBttn)
 	                            .addComponent(deleteBttn)
-	                            .addComponent(editBttn))
-	                        .addGap(2, 2, 2)
+	                            .addComponent(editBttn)
+	                            .addComponent(viewBttn))
+	                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 	                        .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 	                            .addComponent(addLbl)
 	                            .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
 	                                .addComponent(deleteLbl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-	                                .addComponent(editLbl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+	                                .addComponent(editLbl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                                .addComponent(deleteLbl1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
 	                    .addGroup(menuPanelLayout.createSequentialGroup()
 	                        .addComponent(refreshBttn)
 	                        .addGap(1, 1, 1)
 	                        .addComponent(refreshLbl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
 	                        .addGap(0, 0, Short.MAX_VALUE))))
 	        );
-
-	      
-	        instructionLabel.setText("Doble Click para más información");
-
 	        javax.swing.GroupLayout tablePanelLayout = new javax.swing.GroupLayout(tablePanel);
 	        tablePanel.setLayout(tablePanelLayout);
 	        tablePanelLayout.setHorizontalGroup(
 	            tablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 	            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tablePanelLayout.createSequentialGroup()
-	                .addGap(0, 0, 0)
 	                .addComponent(instructionLabel)
 	                .addGap(543, 543, 543))
 	            .addGroup(tablePanelLayout.createSequentialGroup()
@@ -260,6 +298,7 @@ public class ResidentHome extends JFrame {
 	        );
 
 	        pack();
+	        
 	        bttnEvents();
 	        
 	    }

@@ -65,6 +65,7 @@ public class RegisterResident extends JFrame{
     
     private boolean isEnabled;
     private String id;
+    private static String residentID;
 	
 	/**
 	 * Registers a new resident.
@@ -77,7 +78,7 @@ public class RegisterResident extends JFrame{
 	}
 	
 	/**
-	 * Registers a new resident.
+	 * Edits an existing resident.
 	 * @param status The status of the interface.
 	 * @param id The id of the resident.
 	 */
@@ -128,6 +129,8 @@ public class RegisterResident extends JFrame{
 	private void buttonsEvents() {
 		nextBttn.addActionListener(new ActionListener() {
 
+			private String residentID;
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
@@ -136,7 +139,8 @@ public class RegisterResident extends JFrame{
 						getInput();
 						rc.addResident(name, lastName, lastName2, birth, room, bed);
 						dispose();
-						new ResidentHome();
+						this.residentID = ResidentController.id;
+						new RegisterRelative(residentID);
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();

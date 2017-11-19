@@ -4,8 +4,7 @@ package model;
  * A condition of a resident.
  */
 public class Condition {
-	private int conditionid;
-	private int residentid;
+	private String residentid;
 	private String name;
 	private String type;
 	private String severity;
@@ -17,14 +16,17 @@ public class Condition {
 	 * @param type The type of condition.
 	 * @param severity The severity of the condition. 
 	 */
-	public Condition(int conditionid, int residentid, String name, String type, String severity) {
-		this.conditionid = conditionid;
+	public Condition(String residentid, String name, String type, String severity) {
 		this.residentid = residentid;
 		this.name = name;
 		this.type = type;
 		this.severity = severity;
 	}
 	
+	public Condition() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -44,19 +46,11 @@ public class Condition {
 		this.severity = severity;
 	}
 
-	public int getConditionid() {
-		return conditionid;
-	}
-
-	public void setConditionid(int conditionid) {
-		this.conditionid = conditionid;
-	}
-
-	public int getResidentid() {
+	public String getResidentid() {
 		return residentid;
 	}
 
-	public void setResidentid(int residentid) {
+	public void setResidentid(String residentid) {
 		this.residentid = residentid;
 	}
 	

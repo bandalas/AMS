@@ -1,4 +1,5 @@
 import view.Login;
+import view.RegisterPrescription;
 
 /**
  * Starts the system.

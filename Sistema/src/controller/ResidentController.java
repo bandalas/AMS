@@ -13,6 +13,7 @@ import model.Resident;
  * For the residents table in the database.
  */
 public class ResidentController {
+	public static String id;
 	private ResidentDB rdb = new ResidentDB();
 	
 	/**
@@ -89,6 +90,7 @@ public class ResidentController {
 		for(int i = d.length-1 ; i>=0 ; i--) {
 			id+=d[i];
 		}
+		ResidentController.id = id.toUpperCase();
 		return id.toUpperCase();
 	}
 	

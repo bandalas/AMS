@@ -7,12 +7,12 @@ import java.util.Date;
  */
 public class Prescription {
 
-	private int prescriptionid;
-	private int residentid;
+	private String residentid;
 	private String doctorName;
 	private Date date;
 	private String symptoms;
 	private String description;
+	private int id;
 	
 	/**
 	 * @param prescriptionid Auto generated id.
@@ -22,8 +22,16 @@ public class Prescription {
 	 * @param symptoms The symptoms of the resident.
 	 * @param description A description.
 	 */
-	public Prescription (int prescriptionid, int residentid, String doctorName, Date date, String symptoms, String description) {
-		this.setPrescriptionid(prescriptionid);
+	public Prescription (String residentid, String doctorName, Date date, String symptoms, String description) {
+		this.setResidentid(residentid);
+		this.setDoctorName(doctorName);
+		this.setDate(date);
+		this.setSymptoms(symptoms);
+		this.setDescription(description);
+	}
+	
+	public Prescription (int pid, String residentid, String doctorName, Date date, String symptoms, String description) {
+		this.id = pid;
 		this.setResidentid(residentid);
 		this.setDoctorName(doctorName);
 		this.setDate(date);
@@ -31,19 +39,15 @@ public class Prescription {
 		this.setDescription(description);
 	}
 
-	public int getPrescriptionid() {
-		return prescriptionid;
+	public Prescription() {
+		// TODO Auto-generated constructor stub
 	}
 
-	public void setPrescriptionid(int prescriptionid) {
-		this.prescriptionid = prescriptionid;
-	}
-
-	public int getResidentid() {
+	public String getResidentid() {
 		return residentid;
 	}
 
-	public void setResidentid(int residentid) {
+	public void setResidentid(String residentid) {
 		this.residentid = residentid;
 	}
 
@@ -73,6 +77,10 @@ public class Prescription {
 
 	public Date getDate() {
 		return date;
+	}
+	
+	public int getID() {
+		return id;
 	}
 
 	public void setDate(Date date) {

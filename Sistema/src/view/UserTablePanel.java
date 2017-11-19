@@ -1,6 +1,9 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Point;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 
 import javax.swing.JPanel;
@@ -43,5 +46,7 @@ public class UserTablePanel extends JPanel {
 	public void setEtm(UserTableModel utm) {
 		this.utm = utm;
 	}
+	
+	
 	
 }

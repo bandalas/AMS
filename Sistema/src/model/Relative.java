@@ -5,7 +5,7 @@ package model;
  */
 public class Relative {
 
-	private int relativeid;
+	
 	private String firstName;
 	private String lastName;
 	private String phone;
@@ -18,20 +18,11 @@ public class Relative {
 	 * @param phone Phone number.
 	 * @param address Address.
 	 */
-	public Relative(int relativeid, String firstName, String lastName, String phone, String address) {
-		this.setRelativeid(relativeid);
+	public Relative(String firstName, String lastName, String phone, String address) {
 		this.setFirstName(firstName);
 		this.setLastName(lastName);
 		this.setPhone(phone);
 		this.setAddress(address);
-	}
-
-	public int getRelativeid() {
-		return relativeid;
-	}
-
-	public void setRelativeid(int relativeid) {
-		this.relativeid = relativeid;
 	}
 
 	public String getFirstName() {
@@ -65,4 +56,5 @@ public class Relative {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+	
 }
