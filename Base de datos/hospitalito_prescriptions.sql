@@ -24,13 +24,15 @@ DROP TABLE IF EXISTS `prescriptions`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `prescriptions` (
   `PrescriptionID` int(11) NOT NULL AUTO_INCREMENT,
-  `ResidentID` int(11) DEFAULT NULL,
+  `ResidentID` varchar(50) DEFAULT NULL,
   `DoctorName` varchar(50) DEFAULT NULL,
   `Date` date DEFAULT NULL,
   `Symptoms` varchar(100) DEFAULT NULL,
   `Description` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`PrescriptionID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`PrescriptionID`),
+  KEY `prescriptions_ibfk_1_idx` (`ResidentID`),
+  CONSTRAINT `prescriptions_ibfk_1` FOREIGN KEY (`ResidentID`) REFERENCES `residents` (`ResidentID`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,6 +41,7 @@ CREATE TABLE `prescriptions` (
 
 LOCK TABLES `prescriptions` WRITE;
 /*!40000 ALTER TABLE `prescriptions` DISABLE KEYS */;
+INSERT INTO `prescriptions` VALUES (4,'ALKL20171119','Karla','2011-11-11','dslkjfbalds','lkjdlkadsjfnalks');
 /*!40000 ALTER TABLE `prescriptions` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -51,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-10 22:13:05
+-- Dump completed on 2017-11-20  0:56:04

@@ -24,11 +24,13 @@ DROP TABLE IF EXISTS `absences`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `absences` (
   `AbsenceID` int(11) NOT NULL AUTO_INCREMENT,
-  `ResidentID` int(11) DEFAULT NULL,
+  `ResidentID` varchar(50) DEFAULT NULL,
   `StartDate` date DEFAULT NULL,
   `EndDate` date DEFAULT NULL,
   `Reason` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`AbsenceID`)
+  PRIMARY KEY (`AbsenceID`),
+  KEY `absences_ibfk_1_idx` (`ResidentID`),
+  CONSTRAINT `absences_ibfk_1` FOREIGN KEY (`ResidentID`) REFERENCES `residents` (`ResidentID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -50,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-10 22:13:05
+-- Dump completed on 2017-11-20  0:56:04

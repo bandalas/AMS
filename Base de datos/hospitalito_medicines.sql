@@ -28,11 +28,10 @@ CREATE TABLE `medicines` (
   `name` varchar(30) DEFAULT NULL,
   `DurationDays` int(11) DEFAULT NULL,
   `DailyDose` decimal(10,0) DEFAULT NULL,
-  `Indications` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`MedicineID`),
   KEY `PrescriptionID` (`PrescriptionID`),
-  CONSTRAINT `medicines_ibfk_1` FOREIGN KEY (`PrescriptionID`) REFERENCES `prescriptions` (`PrescriptionID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  CONSTRAINT `medicines_ibfk_1` FOREIGN KEY (`PrescriptionID`) REFERENCES `prescriptions` (`PrescriptionID`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,6 +40,7 @@ CREATE TABLE `medicines` (
 
 LOCK TABLES `medicines` WRITE;
 /*!40000 ALTER TABLE `medicines` DISABLE KEYS */;
+INSERT INTO `medicines` VALUES (1,4,NULL,3,3),(2,4,NULL,3,3),(3,4,NULL,9,9);
 /*!40000 ALTER TABLE `medicines` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -53,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-10 22:13:05
+-- Dump completed on 2017-11-20  0:56:04

@@ -40,7 +40,7 @@ CREATE TABLE `residents` (
 
 LOCK TABLES `residents` WRITE;
 /*!40000 ALTER TABLE `residents` DISABLE KEYS */;
-INSERT INTO `residents` VALUES ('AROB20171110','Ariadna','Robledo Bandala','2017-11-10','VIVO','10','1');
+INSERT INTO `residents` VALUES ('ALKL20171119','alskdjfh','lkjdhf lkjhfd','2017-11-19','VIVO','3','8');
 /*!40000 ALTER TABLE `residents` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -53,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-10 22:13:06
+-- Dump completed on 2017-11-20  0:56:04

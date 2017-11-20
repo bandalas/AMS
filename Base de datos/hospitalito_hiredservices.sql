@@ -24,10 +24,12 @@ DROP TABLE IF EXISTS `hiredservices`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `hiredservices` (
   `ServiceID` int(11) NOT NULL,
-  `ResidentID` int(11) NOT NULL,
+  `ResidentID` varchar(50) NOT NULL,
   `ClientNumber` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`ServiceID`,`ResidentID`),
-  CONSTRAINT `hiredservices_ibfk_1` FOREIGN KEY (`ServiceID`) REFERENCES `emergencyservices` (`ServiceID`)
+  KEY `hiredservices_ibfk_2_idx` (`ResidentID`),
+  CONSTRAINT `hiredservices_ibfk_1` FOREIGN KEY (`ServiceID`) REFERENCES `emergencyservices` (`ServiceID`),
+  CONSTRAINT `hiredservices_ibfk_2` FOREIGN KEY (`ResidentID`) REFERENCES `residents` (`ResidentID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -49,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-10 22:13:05
+-- Dump completed on 2017-11-20  0:56:04

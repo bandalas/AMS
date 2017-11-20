@@ -24,12 +24,14 @@ DROP TABLE IF EXISTS `conditions`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `conditions` (
   `ConditionID` int(11) NOT NULL AUTO_INCREMENT,
-  `ResidentID` int(11) DEFAULT NULL,
+  `ResidentID` varchar(50) DEFAULT NULL,
   `Name` varchar(30) DEFAULT NULL,
   `Type` varchar(30) DEFAULT NULL,
   `Severity` varchar(30) DEFAULT NULL,
-  PRIMARY KEY (`ConditionID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`ConditionID`),
+  KEY `conditions_ibfk_1_idx` (`ResidentID`),
+  CONSTRAINT `conditions_ibfk_1` FOREIGN KEY (`ResidentID`) REFERENCES `residents` (`ResidentID`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,6 +40,7 @@ CREATE TABLE `conditions` (
 
 LOCK TABLES `conditions` WRITE;
 /*!40000 ALTER TABLE `conditions` DISABLE KEYS */;
+INSERT INTO `conditions` VALUES (10,'ALKL20171119','sadjfalsdkj','njlasdkf','Leve');
 /*!40000 ALTER TABLE `conditions` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -50,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-10 22:13:06
+-- Dump completed on 2017-11-20  0:56:04

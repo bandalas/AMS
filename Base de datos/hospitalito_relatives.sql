@@ -29,7 +29,7 @@ CREATE TABLE `relatives` (
   `Phone` varchar(15) DEFAULT NULL,
   `Address` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`RelativeID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,6 +38,7 @@ CREATE TABLE `relatives` (
 
 LOCK TABLES `relatives` WRITE;
 /*!40000 ALTER TABLE `relatives` DISABLE KEYS */;
+INSERT INTO `relatives` VALUES (1,'huhuhu','huhuh','900889','huhuh,huhu'),(2,'asdlfkjahdsf','jlkhdlkjhaf','23408','lkjnladsjfn,ljsnflajsdnf');
 /*!40000 ALTER TABLE `relatives` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -50,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-10 22:13:06
+-- Dump completed on 2017-11-20  0:56:04

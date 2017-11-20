@@ -24,13 +24,15 @@ DROP TABLE IF EXISTS `events`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `events` (
   `EventID` int(11) NOT NULL AUTO_INCREMENT,
-  `ResidentID` int(11) DEFAULT NULL,
+  `ResidentID` varchar(50) DEFAULT NULL,
   `Username` varchar(20) DEFAULT NULL,
   `Type` varchar(50) DEFAULT NULL,
   `Description` varchar(100) DEFAULT NULL,
   `Date` date DEFAULT NULL,
   PRIMARY KEY (`EventID`),
   KEY `Username` (`Username`),
+  KEY `events_ibfk_2_idx` (`ResidentID`),
+  CONSTRAINT `events_ibfk_1` FOREIGN KEY (`ResidentID`) REFERENCES `residents` (`ResidentID`),
   CONSTRAINT `events_ibfk_2` FOREIGN KEY (`Username`) REFERENCES `users` (`Username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -53,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-10 22:13:06
+-- Dump completed on 2017-11-20  0:56:04
