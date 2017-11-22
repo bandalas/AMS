@@ -3,6 +3,7 @@ package view;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 import controller.ViewDataController;
 
@@ -74,17 +75,23 @@ public class ViewData extends JFrame{
     
     private ViewDataController vdc;
     private ArrayList<String> data;
+    private ArrayList<JLabel> labels;
+
    
     public ViewData(String id) {
     		super();
-    		initComponents();
     		vdc = new ViewDataController(id);
+    		data = new ArrayList<String>();
+    		labels = new ArrayList<JLabel>();
+    		initComponents();
+    		
  
     		
     }
     
     
     private void initComponents() {
+    		data = vdc.getData();
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();      
@@ -122,8 +129,7 @@ public class ViewData extends JFrame{
         contiditonType = new javax.swing.JLabel();
         conditionType2 = new javax.swing.JLabel();
         
-        
-        
+      
         
         jSeparator3 = new javax.swing.JSeparator();
         jLabel29 = new javax.swing.JLabel();
@@ -157,6 +163,29 @@ public class ViewData extends JFrame{
         duration3 = new javax.swing.JLabel();
         jLabel57 = new javax.swing.JLabel();
         dose3 = new javax.swing.JLabel();
+        
+        labels.add(room);
+        labels.add(bed);
+        labels.add(name);
+        labels.add(lastNames);
+        labels.add(birthDate);
+        labels.add(status);
+        labels.add(Condition);
+        labels.add(contiditonType);
+        labels.add(conditionSeverity);
+        labels.add(doctor);
+        labels.add(datePres);
+        labels.add(Symptoms);
+        labels.add(description);
+        labels.add(nameMed);
+        labels.add(duration);
+        labels.add(dose);
+        labels.add(nameMed2);
+        labels.add(duration2);
+        labels.add(dose2);
+        labels.add(nameMed3);
+        labels.add(duration3);
+        labels.add(dose3);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -168,20 +197,8 @@ public class ViewData extends JFrame{
 
         lastNamesLbl.setText("Apellido(s)");
 
-        //name.setText("jLabel1");
-        
-        //AQUI
-        
-        
-        name.setText(vdc.data.get(0));
+        name.setText("jLabel1");
 
-        
-        
-        
-        
-        
-        // AQUI
-        
         lastNames.setText("jLabel1");
 
         birthLbl.setText("Nacimiento");
@@ -192,97 +209,80 @@ public class ViewData extends JFrame{
 
         status.setText("jLabel1");
 
-        jLabel13.setText("jLabel1");
-
-        jLabel14.setText("jLabel1");
-
-        relativeLast.setText("jLabel1");
-
-        relativeName.setText("jLabel1");
-
-        jLabel17.setText("jLabel1");
-
-        addressRelati.setText("jLabel1");
-
-        jLabel19.setText("jLabel1");
-
-        telephoneRelat.setText("jLabel1");
-
-        jLabel21.setText("jLabel1");
+        jLabel21.setText("Condición");
 
         Condition.setText("jLabel1");
 
-        jLabel23.setText("jLabel1");
-
-        condition2.setText("jLabel1");
-
-        jLabel25.setText("jLabel1");
+        jLabel25.setText("Tipo");
 
         contiditonType.setText("jLabel1");
 
-        jLabel27.setText("jLabel1");
-
-        conditionType2.setText("jLabel1");
-
-        jLabel29.setText("jLabel1");
+        jLabel29.setText("Severidad");
 
         conditionSeverity.setText("jLabel1");
 
-        jLabel31.setText("jLabel1");
-
-        conditionSev2.setText("jLabel1");
-
-        jLabel33.setText("jLabel1");
+        jLabel33.setText("Doctor");
 
         doctor.setText("jLabel1");
 
-        jLabel35.setText("jLabel1");
+        jLabel35.setText("Sintomas");
 
         Symptoms.setText("jLabel1");
 
-        jLabel37.setText("jLabel1");
+        jLabel37.setText("Fecha de receta");
 
         datePres.setText("jLabel1");
 
-        jLabel39.setText("jLabel1");
+        jLabel39.setText("Descripción");
 
         description.setText("jLabel1");
 
-        jLabel41.setText("jLabel1");
+        jLabel41.setText("Medicamento");
 
         nameMed.setText("jLabel1");
 
-        jLabel43.setText("jLabel1");
+        jLabel43.setText("Duración");
 
         duration.setText("jLabel1");
 
-        jLabel45.setText("jLabel1");
+        jLabel45.setText("Dosis");
 
         dose.setText("jLabel1");
 
-        jLabel47.setText("jLabel1");
+        jLabel47.setText("Medicamento");
 
         nameMed2.setText("jLabel1");
 
-        jLabel49.setText("jLabel1");
+        jLabel49.setText("Duración");
 
         duration2.setText("jLabel1");
 
-        jLabel51.setText("jLabel1");
+        jLabel51.setText("Dosis");
 
         dose2.setText("jLabel1");
 
-        jLabel53.setText("jLabel1");
+        jLabel53.setText("Medicamento");
 
         nameMed3.setText("jLabel1");
 
-        jLabel55.setText("jLabel1");
+        jLabel55.setText("Duración");
 
         duration3.setText("jLabel1");
 
-        jLabel57.setText("jLabel1");
+        jLabel57.setText("Dosis");
 
         dose3.setText("jLabel1");
+
+        int cont = 0;
+        for (int i= 0; i<data.size(); i++) {
+        		cont++;
+    			labels.get(i).setText(data.get(i));
+        }
+        
+        for(int i = cont ; i<labels.size(); i++) {
+        		labels.get(i).setVisible(false);
+        }
+   
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

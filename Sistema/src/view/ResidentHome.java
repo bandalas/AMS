@@ -182,7 +182,7 @@ public class ResidentHome extends JFrame {
 	        deleteBttn.setIcon(new javax.swing.ImageIcon("img/delete.png")); 
 
 	        refreshBttn.setIcon(new javax.swing.ImageIcon("img/refresh.png")); 
-	        viewBttn.setIcon(new javax.swing.ImageIcon("img/refresh.png"));
+	        viewBttn.setIcon(new javax.swing.ImageIcon("img/view.png"));
 	        
 	        addLbl.setFont(new java.awt.Font("Lucida Grande", 0, 10)); // NOI18N
 	        addLbl.setText("Agregar");

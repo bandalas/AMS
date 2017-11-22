@@ -41,7 +41,7 @@ public class RegisterCondition extends JFrame{
 		this.residentID = residentID;
 		initComponents();
 	}
-	
+
 	private boolean hasCompletedFields() {
 		for (JTextField f : fields) {
 			if (f.getText().equals("")) return false;
